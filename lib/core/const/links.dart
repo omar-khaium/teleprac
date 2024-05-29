@@ -7,7 +7,7 @@ class AppLinks {
   static const String messagingApi =
       'AAAAaLQLrko:APA91bFhUbEA3wI1r9ozBOGV78KG7FvbTuyudyMvvN5gOVesNxpNd5Ev4XpBMd5-heR8GynXIAFPLr03pMfv_A1cBi51Z6cyUh6Llx4Oy8-gXqrvxVKyMZ-pWGRey_i7KXxidUHvh4c_';
   // Base Urls
-  static const String baseUrl = 'https://www.teleprac.com/';
+  static const String baseUrl = 'https://www.teleprac.com';
   static const String api = '$baseUrl/api';
   static const String files = '$baseUrl/uploads';
   static const String blog = '$baseUrl/blog/blog-details';

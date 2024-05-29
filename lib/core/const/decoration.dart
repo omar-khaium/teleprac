@@ -24,10 +24,10 @@ class AppDecoration {
   static const String bg_1 = '$mainPath/bg_1.jpg';
   // Onboarding Images
   static const String onboardingConsultaion =
-      '$onboardingPath/onboarding_1.jpeg';
-  static const String onboardingPharmacy = '$onboardingPath/onboarding_2.jpeg';
+      '$onboardingPath/onboarding_1.jpg';
+  static const String onboardingPharmacy = '$onboardingPath/onboarding_2.jpg';
   static const String onboardingDiagnostic =
-      '$onboardingPath/onboarding_3.jpeg';
+      '$onboardingPath/onboarding_3.jpg';
   static const String onboardingNursing = '$onboardingPath/onboarding_4.jpeg';
   static const String onboardingSurgery = '$onboardingPath/onboarding_5.jpeg';
   // Home Images
