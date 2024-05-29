@@ -166,7 +166,6 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                                   TextEditingController drugNameCon = TextEditingController(
                                     text: controller.medicines[index]['drug_name'],
                                   );
-                                  TextEditingController typeCon = TextEditingController();
 
                                   return Container(
                                     padding: EdgeInsets.all(10.0),
@@ -414,7 +413,11 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                                                 SizedBox(width: 10),
                                                 Text(
                                                   "Remove",
-                                                  style: TextStyle(color: AppColors.red, fontSize: AppDecoration().screenWidth * 0.04, fontWeight: FontWeight.bold, fontFamily: AppDecoration.cairo),
+                                                  style: TextStyle(
+                                                      color: AppColors.red,
+                                                      fontSize: AppDecoration().screenWidth * 0.04,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontFamily: AppDecoration.cairo),
                                                 ),
                                               ],
                                             ),

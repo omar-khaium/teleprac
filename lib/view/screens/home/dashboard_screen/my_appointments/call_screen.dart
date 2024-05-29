@@ -25,8 +25,7 @@ class CallScreen extends StatelessWidget {
                               controller: VideoViewController.remote(
                                 rtcEngine: controller.engine,
                                 canvas: VideoCanvas(uid: controller.remoteUid),
-                                connection: RtcConnection(
-                                    channelId: controller.channelId),
+                                connection: RtcConnection(channelId: controller.channelId),
                               ),
                             )
                           : Icon(
@@ -37,7 +36,7 @@ class CallScreen extends StatelessWidget {
                       : Text(
                           controller.myRole == '1'
                               ? 'Please wait while patient joins the call'
-                              : 'Please wait while docto joins the call',
+                              : 'Please wait while doctor joins the call',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: AppDecoration().screenWidth * 0.12,
@@ -62,45 +61,44 @@ class CallScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: SizedBox(
-                      width: AppDecoration().screenWidth * 0.3,
-                      height: AppDecoration().screenWidth * 0.5,
-                      child: Center(
-                        child: controller.joined
-                            ? AgoraVideoView(
-                                controller: VideoViewController(
-                                  rtcEngine: controller.engine,
-                                  canvas: const VideoCanvas(uid: 0),
-                                ),
-                              )
-                            : const CircularProgressIndicator(),
-                      ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                    width: AppDecoration().screenWidth * 0.3,
+                    height: AppDecoration().screenWidth * 0.5,
+                    child: Center(
+                      child: controller.joined
+                          ? AgoraVideoView(
+                              controller: VideoViewController(
+                                rtcEngine: controller.engine,
+                                canvas: const VideoCanvas(uid: 0),
+                              ),
+                            )
+                          : const CircularProgressIndicator(),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: SizedBox(
-                      width: AppDecoration().screenWidth * 0.3,
-                      height: AppDecoration().screenWidth * 0.5,
-                      child: Center(
-                        child: controller.joined
-                            ? AgoraVideoView(
-                                controller: VideoViewController(
-                                  rtcEngine: controller.engine,
-                                  canvas: const VideoCanvas(uid: 0),
-                                ),
-                              )
-                            : const CircularProgressIndicator(),
-                      ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                    width: AppDecoration().screenWidth * 0.3,
+                    height: AppDecoration().screenWidth * 0.5,
+                    child: Center(
+                      child: controller.joined
+                          ? AgoraVideoView(
+                              controller: VideoViewController(
+                                rtcEngine: controller.engine,
+                                canvas: const VideoCanvas(uid: 0),
+                              ),
+                            )
+                          : const CircularProgressIndicator(),
                     ),
                   ),
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, bottom: 20, right: 20),
+                    padding: const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
@@ -143,9 +141,7 @@ class CallScreen extends StatelessWidget {
                                 controller.microphone();
                               },
                               child: Icon(
-                                controller.isMicrophoneEnabled
-                                    ? Icons.mic
-                                    : Icons.mic_off,
+                                controller.isMicrophoneEnabled ? Icons.mic : Icons.mic_off,
                                 color: AppColors.secondaryColor,
                                 size: AppDecoration().screenWidth * 0.13,
                               ),
@@ -163,9 +159,7 @@ class CallScreen extends StatelessWidget {
                                 controller.camera();
                               },
                               child: Icon(
-                                controller.isCameraEnabled
-                                    ? Icons.videocam
-                                    : Icons.videocam_off,
+                                controller.isCameraEnabled ? Icons.videocam : Icons.videocam_off,
                                 color: AppColors.secondaryColor,
                                 size: AppDecoration().screenWidth * 0.13,
                               ),

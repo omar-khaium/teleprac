@@ -92,10 +92,8 @@ class AppRoutes {
   static const String myPrescriptionsScreen = '/myPrescriptionsScreen';
   static const String payForMedicinesScreen = '/payForMedicinesScreen';
   static const String payForLabTestsScreen = '/payForLabTestsScreen';
-  static const String payForMedicinesCheckoutPreview =
-      '/payForMedicinesCheckoutPreview';
-  static const String payForLabTestsCheckoutPreview =
-      '/payForLabTestsCheckoutPreview';
+  static const String payForMedicinesCheckoutPreview = '/payForMedicinesCheckoutPreview';
+  static const String payForLabTestsCheckoutPreview = '/payForLabTestsCheckoutPreview';
   static const String labAppointmentsScreen = '/labAppointmentsScreen';
   static const String myInvoicesScreen = '/myInvoicesScreen';
   static const String myFavouritesScreen = '/myFavouritesScreen';
@@ -134,15 +132,14 @@ class AppRoutes {
   static const String pharmaciesProductScreen = '/ProductDetailsScreen';
   static const String pharmacyDetails = '/pharmacyDetails';
   static const String productDetails = '/productDetails';
-   static const String invoiceScreen = '/invoiceScreen';
+  static const String invoiceScreen = '/invoiceScreen';
 }
 
 List<GetPage<dynamic>> routes = [
-
-GetPage(
-  name: AppRoutes.invoiceScreen,
-  page: () => InvoiceScreen(),
-),
+  GetPage(
+    name: AppRoutes.invoiceScreen,
+    page: () => InvoiceScreen(),
+  ),
 
   // Global
   GetPage(
