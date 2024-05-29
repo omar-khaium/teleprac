@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:teleprac/controller/home/dashboard/accounts/doctor_account_update_controller.dart';
 import 'package:teleprac/view/screens/auth/register/otp_verify_screen.dart';
 import 'package:teleprac/view/screens/doctors/notify_me_screen.dart';
 import 'package:teleprac/view/screens/home/dashboard_screen/accounts/doctor_account_update_screen.dart';

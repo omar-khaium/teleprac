@@ -1,18 +1,18 @@
 name: teleprac
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.5 <3.0.0'
+  sdk: ">=2.19.5 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  
+
   # Main
   flutter_native_splash: ^2.2.0+1
   get: ^4.6.5
@@ -35,7 +35,7 @@ dependencies:
   path_provider: ^2.1.1
   # Other
   dropdown_button2: ^2.1.4
-  dropdown_search: ^3.0.1 
+  dropdown_search: ^3.0.1
   fluttertoast: ^8.2.4
   lottie: ^2.3.2
   geolocator: ^10.1.0
@@ -65,8 +65,7 @@ dependencies:
   awesome_notifications: ^0.8.2
   flutter_local_notifications: ^17.1.2
 
-
-dev_dependencies: 
+dev_dependencies:
   package_rename: ^1.5.3
   flutter_launcher_icons:
   flutter_test:
@@ -81,7 +80,6 @@ flutter_launcher_icons:
   image_path: "assets/images/main/app_icon_small.png"
 
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -93,68 +91,67 @@ flutter:
     - assets/images/main/res_launcher_icon.png
     - assets/images/main/bg_0.jpg
     - assets/images/main/bg_1.jpg
-    - assets/new_images/
     # Onboarding Images
-    - 'assets/images/onboarding/onboarding_1.jpeg'
-    - 'assets/images/onboarding/onboarding_2.jpeg'
-    - 'assets/images/onboarding/onboarding_3.jpeg'
-    - 'assets/images/onboarding/onboarding_4.jpeg'
-    - 'assets/images/onboarding/onboarding_5.jpeg'
+    - assets/images/onboarding/onboarding_1.jpg
+    - assets/images/onboarding/onboarding_2.jpg
+    - assets/images/onboarding/onboarding_3.jpg
+    - assets/images/onboarding/onboarding_4.jpeg
+    - assets/images/onboarding/onboarding_5.jpeg
     # Home Images
-    - 'assets/images/home/home_bg.png'
+    - "assets/images/home/home_bg.png"
     # - 'assets/images/home/diagnostic_tests.png'
     # - 'assets/images/home/online_consultation.png'
     # - 'assets/images/home/home_sample_collection.png'
     # - 'assets/images/home/online_pharmacy.png'
-    - 'assets/images/home/diagnostic_tests.jpg'
-    - 'assets/images/home/online_consultation.jpg'
-    - 'assets/images/home/home_sample_collection.jpg'
-    - 'assets/images/home/online_pharmacy.jpg'
+    - "assets/images/home/diagnostic_tests.jpg"
+    - "assets/images/home/online_consultation.jpg"
+    - "assets/images/home/home_sample_collection.jpg"
+    - "assets/images/home/online_pharmacy.jpg"
     # Pharmacy
-      # Categories
-    - 'assets/images/pharmacy/categories/1.png'
-    - 'assets/images/pharmacy/categories/12.png'
-    - 'assets/images/pharmacy/categories/27.png'
-    - 'assets/images/pharmacy/categories/28.png'
-    - 'assets/images/pharmacy/categories/63.png'
+    # Categories
+    - "assets/images/pharmacy/categories/1.png"
+    - "assets/images/pharmacy/categories/12.png"
+    - "assets/images/pharmacy/categories/27.png"
+    - "assets/images/pharmacy/categories/28.png"
+    - "assets/images/pharmacy/categories/63.png"
       # Subcategories
-    - 'assets/images/pharmacy/subcategories/8_subcat.png'
-    - 'assets/images/pharmacy/subcategories/9_subcat.png'
-    - 'assets/images/pharmacy/subcategories/13_subcat.png'
-    - 'assets/images/pharmacy/subcategories/14_subcat.png'
-    - 'assets/images/pharmacy/subcategories/15_subcat.png'
-    - 'assets/images/pharmacy/subcategories/18_subcat.png'
-    - 'assets/images/pharmacy/subcategories/19_subcat.png'
-    - 'assets/images/pharmacy/subcategories/20_subcat.png'
-    - 'assets/images/pharmacy/subcategories/21_subcat.png'
-    - 'assets/images/pharmacy/subcategories/22_subcat.png'
-    - 'assets/images/pharmacy/subcategories/23_subcat.png'
-    - 'assets/images/pharmacy/subcategories/25_subcat.png'
-    - 'assets/images/pharmacy/subcategories/26_subcat.png'
-    - 'assets/images/pharmacy/subcategories/32_subcat.png'
-    - 'assets/images/pharmacy/subcategories/33_subcat.png'
-    - 'assets/images/pharmacy/subcategories/34_subcat.png'
-    - 'assets/images/pharmacy/subcategories/36_subcat.png'
-    - 'assets/images/pharmacy/subcategories/41_subcat.png'
-    - 'assets/images/pharmacy/subcategories/42_subcat.png'
-    - 'assets/images/pharmacy/subcategories/43_subcat.png'
-    - 'assets/images/pharmacy/subcategories/44_subcat.png'
-    - 'assets/images/pharmacy/subcategories/45_subcat.png'
-    - 'assets/images/pharmacy/subcategories/56_subcat.png'
-    - 'assets/images/pharmacy/subcategories/57_subcat.png'
-    - 'assets/images/pharmacy/subcategories/58_subcat.png'
-    - 'assets/images/pharmacy/subcategories/59_subcat.png'
-    - 'assets/images/pharmacy/subcategories/60_subcat.png'
-    - 'assets/images/pharmacy/subcategories/61_subcat.png'
-    - 'assets/images/pharmacy/subcategories/62_subcat.png'
-    - 'assets/images/pharmacy/subcategories/65_subcat.png'
-    - 'assets/images/pharmacy/subcategories/66_subcat.png'
+    - "assets/images/pharmacy/subcategories/8_subcat.png"
+    - "assets/images/pharmacy/subcategories/9_subcat.png"
+    - "assets/images/pharmacy/subcategories/13_subcat.png"
+    - "assets/images/pharmacy/subcategories/14_subcat.png"
+    - "assets/images/pharmacy/subcategories/15_subcat.png"
+    - "assets/images/pharmacy/subcategories/18_subcat.png"
+    - "assets/images/pharmacy/subcategories/19_subcat.png"
+    - "assets/images/pharmacy/subcategories/20_subcat.png"
+    - "assets/images/pharmacy/subcategories/21_subcat.png"
+    - "assets/images/pharmacy/subcategories/22_subcat.png"
+    - "assets/images/pharmacy/subcategories/23_subcat.png"
+    - "assets/images/pharmacy/subcategories/25_subcat.png"
+    - "assets/images/pharmacy/subcategories/26_subcat.png"
+    - "assets/images/pharmacy/subcategories/32_subcat.png"
+    - "assets/images/pharmacy/subcategories/33_subcat.png"
+    - "assets/images/pharmacy/subcategories/34_subcat.png"
+    - "assets/images/pharmacy/subcategories/36_subcat.png"
+    - "assets/images/pharmacy/subcategories/41_subcat.png"
+    - "assets/images/pharmacy/subcategories/42_subcat.png"
+    - "assets/images/pharmacy/subcategories/43_subcat.png"
+    - "assets/images/pharmacy/subcategories/44_subcat.png"
+    - "assets/images/pharmacy/subcategories/45_subcat.png"
+    - "assets/images/pharmacy/subcategories/56_subcat.png"
+    - "assets/images/pharmacy/subcategories/57_subcat.png"
+    - "assets/images/pharmacy/subcategories/58_subcat.png"
+    - "assets/images/pharmacy/subcategories/59_subcat.png"
+    - "assets/images/pharmacy/subcategories/60_subcat.png"
+    - "assets/images/pharmacy/subcategories/61_subcat.png"
+    - "assets/images/pharmacy/subcategories/62_subcat.png"
+    - "assets/images/pharmacy/subcategories/65_subcat.png"
+    - "assets/images/pharmacy/subcategories/66_subcat.png"
     # Lottie
     - assets/images/lottie/check.json
     - assets/images/lottie/loading.json
     # SVG
     - assets/images/icons/send.svg
-    # Icons 
+    # Icons
     - assets/images/icons/heart.png
     - assets/images/icons/doctor.png
     - assets/images/icons/medicine.png
@@ -197,7 +194,6 @@ flutter:
     - assets/images/icons/positive_review.png
     - assets/images/icons/doctor_1.png
     - assets/images/icons/appointment.png
-
 
   #   - images/a_dot_ham.jpeg
 

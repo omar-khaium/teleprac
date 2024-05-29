@@ -30,20 +30,21 @@ class AppointmentDetails extends GetView<AppointmentController> {
               );
             },
           ),
-          Container(
-            height: 70,
-            child: IconButton(
-              onPressed: () {
-                controller.selectDate(context: context);
-              },
-              icon: Column(
+          InkWell(
+            onTap: () => controller.selectDate(context: context),
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.greySplash),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
                 children: [
-                  Image.asset('assets/new_images/Teleprac_calender.png',width: 40,height: 40,),
-                  const SizedBox(height: 2,),
-                  const Text("Calender",style: TextStyle(fontSize: 8),)
+                  Icon(Icons.calendar_month_rounded, color: AppColors.primaryColor),
+                  const Text("Calender", style: TextStyle(fontSize: 14)),
+                  SizedBox(width: 10.0),
                 ],
               ),
-             
             ),
           ),
         ],
@@ -54,79 +55,79 @@ class AppointmentDetails extends GetView<AppointmentController> {
 
 /**
  * Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          GetBuilder<AppointmentController>(
-            builder: (_) {
-              if (controller.appointmentType == 'Online') {
-                return Column(
-                  children: [
-                    Image.asset(
-                      AppDecoration.onlineAppointment,
-                      width: AppDecoration().screenWidth * 0.15,
-                    ),
-                    SizedBox(
-                      width: AppDecoration().screenWidth * 0.32,
-                      child: Text(
-                        AppTexts.onlineAppointment,
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: AppDecoration().screenWidth * 0.045,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return Column(
-                  children: [
-                    Image.asset(
-                      AppDecoration.clinic,
-                      width: AppDecoration().screenWidth * 0.15,
-                    ),
-                    SizedBox(
-                      width: AppDecoration().screenWidth * 0.32,
-                      child: Text(
-                        AppTexts.inClinicAppointment,
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: AppDecoration().screenWidth * 0.045,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
-          SizedBox(
-            width: AppDecoration().screenWidth * 0.1,
-          ),
-          GestureDetector(
-            onTap: () {
-              controller.selectDate(context: context);
-            },
-            child: Column(
-              children: [
-                Image.asset(
-                  AppDecoration.calendar,
-                  width: AppDecoration().screenWidth * 0.13,
-                ),
-                const Text(
-                  'Select Date',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+    GetBuilder<AppointmentController>(
+    builder: (_) {
+    if (controller.appointmentType == 'Online') {
+    return Column(
+    children: [
+    Image.asset(
+    AppDecoration.onlineAppointment,
+    width: AppDecoration().screenWidth * 0.15,
+    ),
+    SizedBox(
+    width: AppDecoration().screenWidth * 0.32,
+    child: Text(
+    AppTexts.onlineAppointment,
+    style: TextStyle(
+    color: AppColors.black,
+    fontSize: AppDecoration().screenWidth * 0.045,
+    fontWeight: FontWeight.bold,
+    ),
+    textAlign: TextAlign.center,
+    ),
+    ),
+    ],
+    );
+    } else {
+    return Column(
+    children: [
+    Image.asset(
+    AppDecoration.clinic,
+    width: AppDecoration().screenWidth * 0.15,
+    ),
+    SizedBox(
+    width: AppDecoration().screenWidth * 0.32,
+    child: Text(
+    AppTexts.inClinicAppointment,
+    style: TextStyle(
+    color: AppColors.black,
+    fontSize: AppDecoration().screenWidth * 0.045,
+    fontWeight: FontWeight.bold,
+    ),
+    textAlign: TextAlign.center,
+    ),
+    ),
+    ],
+    );
+    }
+    },
+    ),
+    SizedBox(
+    width: AppDecoration().screenWidth * 0.1,
+    ),
+    GestureDetector(
+    onTap: () {
+    controller.selectDate(context: context);
+    },
+    child: Column(
+    children: [
+    Image.asset(
+    AppDecoration.calendar,
+    width: AppDecoration().screenWidth * 0.13,
+    ),
+    const Text(
+    'Select Date',
+    style: TextStyle(
+    color: AppColors.black,
+    fontWeight: FontWeight.w700,
+    ),
+    textAlign: TextAlign.center,
+    ),
+    ],
+    ),
+    ),
+    ],
+    ),
  */

@@ -11,24 +11,24 @@ class NotificationSetUp {
   Future<void> initializeNotification() async {
     // Initialize AwesomeNotifications
     AwesomeNotifications().initialize(
-      null,
-      [
-        NotificationChannel(
-          channelKey: 'basic_channel_group',
-          channelName: 'FYP Ideas', // Customize the channel name
-          importance: NotificationImportance.Max,
-          vibrationPattern: highVibrationPattern, // Optional vibration pattern
-          channelShowBadge: true,
-          channelDescription: 'Notifications for FYP Idea uploads.', // Customize the description
-        ),
-      ],
+        null,
+        [
+          NotificationChannel(
+            channelKey: 'basic_channel_group',
+            channelName: 'FYP Ideas', // Customize the channel name
+            importance: NotificationImportance.Max,
+            vibrationPattern: highVibrationPattern, // Optional vibration pattern
+            channelShowBadge: true,
+            channelDescription: 'Notifications for FYP Idea uploads.', // Customize the description
+          ),
+        ],
         channelGroups: [
           NotificationChannelGroup(
-              channelGroupKey: 'basic_channel_group',
-              channelGroupName: 'Basic group',)
+            channelGroupKey: 'basic_channel_group',
+            channelGroupName: 'Basic group',
+          )
         ],
-        debug: true
-    );
+        debug: true);
 
     // Check if notification permission is allowed and request if not
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
@@ -41,8 +41,7 @@ class NotificationSetUp {
   void configurePushNotifications(BuildContext context) async {
     await initializeNotification();
 
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification
       badge: true,
       sound: true,
@@ -68,11 +67,11 @@ class NotificationSetUp {
   Future<void> createOrderNotifications({String? title, String? body}) async {
     await AwesomeNotifications().createNotification(
         content: NotificationContent(
-          id: 0,
-          channelKey: 'basic_channel_group',
-          title: title,
-          body: body,
-        ));
+      id: 0,
+      channelKey: 'basic_channel_group',
+      title: title,
+      body: body,
+    ));
   }
 
   void eventListenerCallback(BuildContext context) {

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teleprac/controller/pharmacies/pharmacies_controller.dart';
 import 'package:teleprac/controller/search_con.dart';
+import 'package:teleprac/core/const/colors.dart';
 import 'package:teleprac/core/const/decoration.dart';
 import 'package:teleprac/view/widgets/global/custom_button.dart';
+import 'package:teleprac/view/widgets/global/upper_part.dart';
 import 'package:teleprac/view/widgets/pharmacies/pharmacy_products/categories_filters.dart';
 import 'package:teleprac/view/widgets/pharmacies/pharmacy_products/products_list.dart';
 import 'package:teleprac/view/widgets/pharmacies/pharmacy_products/search_bar.dart';
-import 'package:teleprac/view/widgets/global/upper_part.dart';
-import 'package:teleprac/core/const/colors.dart';
 import 'package:teleprac/view/widgets/pharmacies/pharmacy_products/subcategories_filters.dart';
 
 class PharmaciesProductsScreen extends StatelessWidget {
@@ -30,7 +30,7 @@ class PharmaciesProductsScreen extends StatelessWidget {
               UpperPart(
                 text: 'Products',
                 customBackFunction: controller.willPop,
-
+                cartVisible: true,
               ),
               SizedBox(height: AppDecoration().screenHeight * 0.02),
               const PharmacyProductsSearchBar(),

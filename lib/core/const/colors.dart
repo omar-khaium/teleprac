@@ -23,6 +23,7 @@ class AppColors {
   static const Color lightGrey1 = Color.fromARGB(182, 158, 156, 156);
   //Others
   static const Color greenAccent = Color(0x6E69F0AF);
+  static const Color greenAccent2 = Color(0xFF69F0AF);
   static const Color lightGreen = Color(0x2169F0AF);
   static const Color lightGreenSecond = Color(0xCD12DFC4);
   static const Color darkGreen = Color(0xFF217B24);

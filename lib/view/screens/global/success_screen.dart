@@ -33,6 +33,19 @@ class SuccessScreen extends StatelessWidget {
                   frameRate: FrameRate(90),
                 ),
               ),
+              SizedBox(
+                width: AppDecoration().screenWidth * 0.8,
+                child: Text(
+                  controller.centerText ?? "Thank you for your interest, We will notify you as soon as this doctor is available",
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: AppDecoration().screenWidth * 0.04,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppDecoration.cairo,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
               const Spacer(),
               CustomButton(
                 function: controller.function,
@@ -66,10 +79,10 @@ class SuccessScreen extends StatelessWidget {
               SizedBox(
                 width: AppDecoration().screenWidth,
                 child: Text(
-                  controller.centerText!,
+                  controller.centerText ?? "Thank you for your interest, We will notify you as soon as this doctor is available",
                   style: TextStyle(
                     color: AppColors.black,
-                    fontSize: AppDecoration().screenWidth * 0.05,
+                    fontSize: 16,
                   ),
                   textAlign: TextAlign.center,
                 ),

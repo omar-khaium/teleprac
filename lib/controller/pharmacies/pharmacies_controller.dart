@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'package:crypto/crypto.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:teleprac/controller/main_controller.dart';
 import 'package:teleprac/controller/search_con.dart';
@@ -55,8 +57,7 @@ class PharmaciesController extends GetxController {
     loading();
     var pharmaciesRes = await allPharamaciesRequest();
     if (pharmaciesRes is RequsetStatus == false) {
-      ResponseModel pharmaciesResponseModel =
-          ResponseModel.fromJson(pharmaciesRes);
+      ResponseModel pharmaciesResponseModel = ResponseModel.fromJson(pharmaciesRes);
       if (pharmaciesResponseModel.responseCode == '200') {
         pharmacies = pharmaciesResponseModel.data['data'];
       }
@@ -75,26 +76,16 @@ class PharmaciesController extends GetxController {
 
   productDetails({required ProductModel productModel}) async {
     await myServices.sharedPreferences.setString('lastViewingType', 'product');
-    await myServices.sharedPreferences
-        .setString('lastProductID', productModel.id ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductImage', productModel.uploadImageUrl ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductDiscount', productModel.discount ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductPrice', productModel.price ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductSalePrice', productModel.salePrice ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductMedicineType', productModel.medicineType ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductName', productModel.name ?? '');
-    await myServices.sharedPreferences.setString(
-        'lastProductManufacturedBy', productModel.manufacturedBy ?? '');
-    await myServices.sharedPreferences
-        .setString('lastProductComposition', productModel.composition ?? '');
-    await myServices.sharedPreferences.setString(
-        'lastProductShortDescription', productModel.shortDescription ?? '');
+    await myServices.sharedPreferences.setString('lastProductID', productModel.id ?? '');
+    await myServices.sharedPreferences.setString('lastProductImage', productModel.uploadImageUrl ?? '');
+    await myServices.sharedPreferences.setString('lastProductDiscount', productModel.discount ?? '');
+    await myServices.sharedPreferences.setString('lastProductPrice', productModel.price ?? '');
+    await myServices.sharedPreferences.setString('lastProductSalePrice', productModel.salePrice ?? '');
+    await myServices.sharedPreferences.setString('lastProductMedicineType', productModel.medicineType ?? '');
+    await myServices.sharedPreferences.setString('lastProductName', productModel.name ?? '');
+    await myServices.sharedPreferences.setString('lastProductManufacturedBy', productModel.manufacturedBy ?? '');
+    await myServices.sharedPreferences.setString('lastProductComposition', productModel.composition ?? '');
+    await myServices.sharedPreferences.setString('lastProductShortDescription', productModel.shortDescription ?? '');
     mainController.setLast();
     Get.toNamed(
       AppRoutes.productDetails,
@@ -129,15 +120,10 @@ class PharmaciesController extends GetxController {
 
   addToCart({required ProductModel productModel}) async {
     loading();
-    await addToCartRequest(
-      id: productModel.id!,
-    );
+    await addToCartRequest(id: productModel.id!);
     cartProducts.add(productModel.id);
-
-    // mainController.cartProducts.add({
-    //   'product_id': productModel.id,
-    //   'qty': '1',
-    // });
+    Fluttertoast.showToast(msg: 'Product Add to Cart', textColor: AppColors.secondaryColor, backgroundColor: AppColors.primaryColor);
+    mainController.getCartProducts();
 
     // await myCart.set({
     //   'products': mainController.cartProducts,
@@ -154,6 +140,8 @@ class PharmaciesController extends GetxController {
   removeFromCart({required ProductModel productModel}) async {
     loading();
     await removeFromCartRequest(id: productModel.id!);
+    mainController.getCartProducts();
+
     cartProducts.remove(productModel.id);
     // for (var cartItem in mainController.cartProducts) {
     // if (cartItem['product_id'] == productModel.id) {

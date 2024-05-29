@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 // import 'package:fl_geocoder/fl_geocoder.dart';
 // import 'package:geolocator/geolocator.dart';
 // import 'package:permission_handler/permission_handler.dart';
@@ -72,15 +73,13 @@ class MainController extends GetxController {
     lastName = myServices.sharedPreferences.getString('last_name') ?? '';
     myRole = myServices.sharedPreferences.getString('role');
     fullName = '$firstName $lastName';
-    currentLocation =
-        myServices.sharedPreferences.getString('currentLocation') ??
-            'Unavailable';
+    currentLocation = myServices.sharedPreferences.getString('currentLocation') ?? 'Unavailable';
     getAllData();
+    shoppingCart();
     setLast();
     tz.initializeTimeZones();
     indianTimeZone = tz.getLocation('Asia/Kolkata');
-    bookLabTestDate =
-        tz.TZDateTime.now(indianTimeZone).toString().substring(0, 10);
+    bookLabTestDate = tz.TZDateTime.now(indianTimeZone).toString().substring(0, 10);
     super.onInit();
   }
 
@@ -89,22 +88,15 @@ class MainController extends GetxController {
     if (lastViewingType == 'product') {
       savedProductModel = ProductModel.fromJson({
         'id': myServices.sharedPreferences.getString('lastProductID'),
-        'lastProductImage':
-            myServices.sharedPreferences.getString('lastProductImage'),
-        'discount':
-            myServices.sharedPreferences.getString('lastProductDiscount'),
+        'lastProductImage': myServices.sharedPreferences.getString('lastProductImage'),
+        'discount': myServices.sharedPreferences.getString('lastProductDiscount'),
         'name': myServices.sharedPreferences.getString('lastProductName'),
         'price': myServices.sharedPreferences.getString('lastProductPrice'),
-        'sale_price':
-            myServices.sharedPreferences.getString('lastProductSalePrice'),
-        'medicine_type':
-            myServices.sharedPreferences.getString('lastProductMedicineType'),
-        'manufactured_by':
-            myServices.sharedPreferences.getString('lastProductManufacturedBy'),
-        'composition':
-            myServices.sharedPreferences.getString('lastProductComposition'),
-        'short_description': myServices.sharedPreferences
-            .getString('lastProductShortDescription'),
+        'sale_price': myServices.sharedPreferences.getString('lastProductSalePrice'),
+        'medicine_type': myServices.sharedPreferences.getString('lastProductMedicineType'),
+        'manufactured_by': myServices.sharedPreferences.getString('lastProductManufacturedBy'),
+        'composition': myServices.sharedPreferences.getString('lastProductComposition'),
+        'short_description': myServices.sharedPreferences.getString('lastProductShortDescription'),
       });
       update();
     } else if (lastViewingType == 'test') {
@@ -116,14 +108,11 @@ class MainController extends GetxController {
           'amount': myServices.sharedPreferences.getString('testPrice'),
           'mrp': myServices.sharedPreferences.getString('testMRP'),
           'discount': myServices.sharedPreferences.getString('testDiscount'),
-          'description':
-              myServices.sharedPreferences.getString('testDescription'),
+          'description': myServices.sharedPreferences.getString('testDescription'),
         },
         'lab_details': {
           'fullname': myServices.sharedPreferences.getString('testLabName'),
-          'profileimage': myServices.sharedPreferences
-              .getString('labPFP')!
-              .replaceAll('${AppLinks.baseUrl}/', ''),
+          'profileimage': myServices.sharedPreferences.getString('labPFP')!.replaceAll('${AppLinks.baseUrl}/', ''),
         },
       });
       update();
@@ -176,6 +165,7 @@ class MainController extends GetxController {
       ResponseModel responseModel = ResponseModel.fromJson(profuctsRes);
       if (responseModel.responseCode == '200') {
         cartProducts = responseModel.data is List ? responseModel.data! : [];
+        update();
       }
       // CollectionReference carts =
       //     FirebaseFirestore.instance.collection('carts');
@@ -455,11 +445,9 @@ class MainController extends GetxController {
       if (allPharmaciesCategories.isEmpty) {
         var pharmaciesCategoriesRes = await allPharamaciesCategoriesRequest();
         if (pharmaciesCategoriesRes is RequsetStatus == false) {
-          ResponseModel pharmaciesCategoriesResponseModel =
-              ResponseModel.fromJson(pharmaciesCategoriesRes);
+          ResponseModel pharmaciesCategoriesResponseModel = ResponseModel.fromJson(pharmaciesCategoriesRes);
           if (pharmaciesCategoriesResponseModel.responseCode == '200') {
-            allPharmaciesCategories =
-                pharmaciesCategoriesResponseModel.data['main_product'];
+            allPharmaciesCategories = pharmaciesCategoriesResponseModel.data['main_product'];
             allUnits = pharmaciesCategoriesResponseModel.data['unit'];
           }
         }
@@ -467,11 +455,9 @@ class MainController extends GetxController {
       if (allPharmaciesProducts.isEmpty) {
         var pharmaciesProductsRes = await allPharamaciesProductsRequest();
         if (pharmaciesProductsRes is RequsetStatus == false) {
-          ResponseModel pharmaciesProductsResponseModel =
-              ResponseModel.fromJson(pharmaciesProductsRes);
+          ResponseModel pharmaciesProductsResponseModel = ResponseModel.fromJson(pharmaciesProductsRes);
           if (pharmaciesProductsResponseModel.responseCode == '200') {
-            allPharmaciesProducts =
-                pharmaciesProductsResponseModel.productsList!;
+            allPharmaciesProducts = pharmaciesProductsResponseModel.productsList!;
           }
         }
       }
@@ -508,11 +494,9 @@ class MainController extends GetxController {
         loading();
         var pharmaciesProductsRes = await allPharamaciesProductsRequest();
         if (pharmaciesProductsRes is RequsetStatus == false) {
-          ResponseModel pharmaciesProductsResponseModel =
-              ResponseModel.fromJson(pharmaciesProductsRes);
+          ResponseModel pharmaciesProductsResponseModel = ResponseModel.fromJson(pharmaciesProductsRes);
           if (pharmaciesProductsResponseModel.responseCode == '200') {
-            allPharmaciesProducts =
-                pharmaciesProductsResponseModel.productsList!;
+            allPharmaciesProducts = pharmaciesProductsResponseModel.productsList!;
           }
         }
         Get.offNamed(
@@ -662,8 +646,7 @@ class MainController extends GetxController {
 
   bookNow({required DoctorModel doctorModel}) async {
     await checkAvailableTimes(doctorModel: doctorModel);
-    String? nextAvailable =
-        await nextAvailableAppointment(doctorId: doctorModel.id!);
+    String? nextAvailable = await nextAvailableAppointment(doctorId: doctorModel.id!);
     List<SessionModel> savedSessions = [];
     for (var element in sessions) {
       SessionModel sessionModel = SessionModel.fromJson(element);
@@ -701,8 +684,7 @@ class MainController extends GetxController {
   }
 
   checkAvailableTimesRequest({required DoctorModel doctorModel}) async {
-    String todayDate =
-        tz.TZDateTime.now(indianTimeZone).toString().substring(0, 10);
+    String todayDate = tz.TZDateTime.now(indianTimeZone).toString().substring(0, 10);
     var res = await crud.connect(
       link: AppLinks.availableSlots,
       data: {
@@ -722,10 +704,7 @@ class MainController extends GetxController {
     var res = await nextAvailableAppointmentRequest(doctorId: doctorId);
     ResponseModel responseModel = ResponseModel.fromJson(res);
     if (responseModel.responseCode == '200') {
-      nextAvailable =
-          responseModel.data['next_availability'].toString() == 'null'
-              ? null
-              : responseModel.data['next_availability'].toString();
+      nextAvailable = responseModel.data['next_availability'].toString() == 'null' ? null : responseModel.data['next_availability'].toString();
     }
     return nextAvailable;
   }
@@ -790,14 +769,14 @@ class MainController extends GetxController {
   // Last Activity Test
   Razorpay razorpay = Razorpay();
   String bookLabTestDate = '';
+
   // String homeSample = '';
   // String testPrice = '';
   selectDate({required BuildContext context}) async {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.parse(bookLabTestDate),
-      firstDate: DateTime.parse(
-          tz.TZDateTime.now(indianTimeZone).toString().substring(0, 10)),
+      firstDate: DateTime.parse(tz.TZDateTime.now(indianTimeZone).toString().substring(0, 10)),
       lastDate: DateTime.parse(bookLabTestDate).add(const Duration(days: 365)),
     );
 
@@ -823,104 +802,104 @@ class MainController extends GetxController {
     );
   }
 
-  // bookTest({
-  //   required TestModel testModel,
-  //   required BuildContext context,
-  // }) async {
-  //  Get.to(
-  //   () => TestCheckoutScreen(
-  //     bookTest: () {
-  //       bookTestRequest(advancedTestModel: advancedTestModel);
-  //     },
-  //     advancedTestModel: advancedTestModel,
-  //   ),
-  //   transition: Transition.downToUp,
-  // );
-  // await selectDate(context: context);
-  // await Get.defaultDialog(
-  //   middleText: 'Do You Want A Home Sample Collection ?',
-  //   onWillPop: () {
-  //     homeSample = '0';
-  //     testPrice = testModel.amount!;
-  //     Get.back();
-  //     return Future.value(false);
-  //   },
-  //   actions: [
-  //     MaterialButton(
-  //       onPressed: () {
-  //         homeSample = '0';
-  //         testPrice = testModel.amount!;
-  //         Get.back();
-  //       },
-  //       color: AppColors.primaryColor,
-  //       child: const Text(
-  //         'No',
-  //         style: TextStyle(
-  //           color: AppColors.secondaryColor,
-  //           fontSize: 15,
-  //           fontWeight: FontWeight.bold,
-  //           fontFamily: AppDecoration.cairo,
-  //         ),
-  //       ),
-  //     ),
-  //     MaterialButton(
-  //       onPressed: () {
-  //         homeSample = '1';
-  //         testPrice = (int.parse(testModel.amount!) + 100).toString();
-  //         Get.back();
-  //       },
-  //       color: AppColors.primaryColor,
-  //       child: const Text(
-  //         'Yes',
-  //         style: TextStyle(
-  //           color: AppColors.secondaryColor,
-  //           fontSize: 15,
-  //           fontWeight: FontWeight.bold,
-  //           fontFamily: AppDecoration.cairo,
-  //         ),
-  //       ),
-  //     ),
-  //   ],
-  // );
-  // razorpay.on(
-  //   Razorpay.EVENT_PAYMENT_SUCCESS,
-  //   (PaymentSuccessResponse response) async {
-  //     var res = await bookTestRequest(testModel: testModel);
+// bookTest({
+//   required TestModel testModel,
+//   required BuildContext context,
+// }) async {
+//  Get.to(
+//   () => TestCheckoutScreen(
+//     bookTest: () {
+//       bookTestRequest(advancedTestModel: advancedTestModel);
+//     },
+//     advancedTestModel: advancedTestModel,
+//   ),
+//   transition: Transition.downToUp,
+// );
+// await selectDate(context: context);
+// await Get.defaultDialog(
+//   middleText: 'Do You Want A Home Sample Collection ?',
+//   onWillPop: () {
+//     homeSample = '0';
+//     testPrice = testModel.amount!;
+//     Get.back();
+//     return Future.value(false);
+//   },
+//   actions: [
+//     MaterialButton(
+//       onPressed: () {
+//         homeSample = '0';
+//         testPrice = testModel.amount!;
+//         Get.back();
+//       },
+//       color: AppColors.primaryColor,
+//       child: const Text(
+//         'No',
+//         style: TextStyle(
+//           color: AppColors.secondaryColor,
+//           fontSize: 15,
+//           fontWeight: FontWeight.bold,
+//           fontFamily: AppDecoration.cairo,
+//         ),
+//       ),
+//     ),
+//     MaterialButton(
+//       onPressed: () {
+//         homeSample = '1';
+//         testPrice = (int.parse(testModel.amount!) + 100).toString();
+//         Get.back();
+//       },
+//       color: AppColors.primaryColor,
+//       child: const Text(
+//         'Yes',
+//         style: TextStyle(
+//           color: AppColors.secondaryColor,
+//           fontSize: 15,
+//           fontWeight: FontWeight.bold,
+//           fontFamily: AppDecoration.cairo,
+//         ),
+//       ),
+//     ),
+//   ],
+// );
+// razorpay.on(
+//   Razorpay.EVENT_PAYMENT_SUCCESS,
+//   (PaymentSuccessResponse response) async {
+//     var res = await bookTestRequest(testModel: testModel);
 
-  //     if (res is RequsetStatus == false) {
-  //       ResponseModel responseModel = ResponseModel.fromJson(res);
-  //       if (responseModel.responseCode == '200') {
-  //         Fluttertoast.showToast(
-  //           msg: 'Done',
-  //           textColor: AppColors.black,
-  //           backgroundColor: AppColors.secondaryColor,
-  //         );
-  //       }
-  //     }
-  //   },
-  // );
-  // razorpay.open({
-  //   'name': '${testModel.labName} - ${testModel.labTestName}',
-  //   'amount': '${double.parse(testPrice).round().toInt()}00',
-  //   'key': AppLinks.razorPay,
-  // });
-  // }
+//     if (res is RequsetStatus == false) {
+//       ResponseModel responseModel = ResponseModel.fromJson(res);
+//       if (responseModel.responseCode == '200') {
+//         Fluttertoast.showToast(
+//           msg: 'Done',
+//           textColor: AppColors.black,
+//           backgroundColor: AppColors.secondaryColor,
+//         );
+//       }
+//     }
+//   },
+// );
+// razorpay.open({
+//   'name': '${testModel.labName} - ${testModel.labTestName}',
+//   'amount': '${double.parse(testPrice).round().toInt()}00',
+//   'key': AppLinks.razorPay,
+// });
+// }
 
-  // bookTestRequest({required TestModel testModel}) async {
-  //   var res = await crud.connect(
-  //     link: AppLinks.bookTest,
-  //     data: {
-  //       'lab_id': testModel.labId,
-  //       'booking_ids': testModel.id,
-  //       'appoinment_date': bookLabTestDate,
-  //       'amount': testPrice,
-  //       'del_type': homeSample,
-  //       'payment_method': '1',
-  //     },
-  //     headers: {
-  //       'token':  myServices.sharedPreferences.getString('token')!,
-  //     },
-  //   );
-  //   return res.fold((l) => l, (r) => r);
-  // }
+// bookTestRequest({required TestModel testModel}) async {
+//   var res = await crud.connect(
+//     link: AppLinks.bookTest,
+//     data: {
+//       'lab_id': testModel.labId,
+//       'booking_ids': testModel.id,
+//       'appoinment_date': bookLabTestDate,
+//       'amount': testPrice,
+//       'del_type': homeSample,
+//       'payment_method': '1',
+//     },
+//     headers: {
+//       'token':  myServices.sharedPreferences.getString('token')!,
+//     },
+//   );
+//   return res.fold((l) => l, (r) => r);
+// }
 }

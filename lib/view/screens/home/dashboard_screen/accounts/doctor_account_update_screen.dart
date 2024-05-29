@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:teleprac/controller/doctors/notify_me_controller.dart';
 import 'package:teleprac/controller/home/dashboard/accounts/doctor_account_update_controller.dart';
 import 'package:teleprac/core/const/decoration.dart';
 import 'package:teleprac/view/widgets/global/custom_button.dart';

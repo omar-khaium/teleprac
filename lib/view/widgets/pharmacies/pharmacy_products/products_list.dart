@@ -31,25 +31,19 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
               //   ),
               Expanded(
                 child: ListView.builder(
-                  physics:
-                      const BouncingScrollPhysics(parent: PageScrollPhysics()),
-                  itemCount: searchCon.filteredProducts.isEmpty
-                      ? searchCon.pharmaciesProducts.length
-                      : searchCon.filteredProducts.length,
+                  physics: const BouncingScrollPhysics(parent: PageScrollPhysics()),
+                  itemCount: searchCon.filteredProducts.isEmpty ? searchCon.pharmaciesProducts.length : searchCon.filteredProducts.length,
                   itemBuilder: (context, index) {
-                    ProductModel productModel =
-                        searchCon.filteredProducts.isEmpty
-                            ? ProductModel.fromJson(
-                                searchCon.pharmaciesProducts[index],
-                              )
-                            : ProductModel.fromJson(
-                                searchCon.filteredProducts[index],
-                              );
-                    bool inCart =
-                        controller.cartProducts.contains(productModel.id);
+                    ProductModel productModel = searchCon.filteredProducts.isEmpty
+                        ? ProductModel.fromJson(
+                            searchCon.pharmaciesProducts[index],
+                          )
+                        : ProductModel.fromJson(
+                            searchCon.filteredProducts[index],
+                          );
+                    bool inCart = controller.cartProducts.contains(productModel.id);
 
-                    if (controller.searchCon
-                        .productSearchValidate(productModel: productModel)) {
+                    if (controller.searchCon.productSearchValidate(productModel: productModel)) {
                       return GestureDetector(
                         onTap: () {
                           controller.productDetails(
@@ -77,35 +71,26 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         child: Hero(
                                           tag: productModel.id!,
                                           child: ProductImage(
-                                            imageUrl:
-                                                productModel.uploadImageUrl!,
+                                            imageUrl: productModel.uploadImageUrl!,
                                           ),
                                         ),
                                       ),
-                                      if (productModel.discount
-                                                  .toString()
-                                                  .removeAllWhitespace !=
-                                              '0' &&
+                                      if (productModel.discount.toString().removeAllWhitespace != '0' &&
                                           productModel.discount != null &&
                                           productModel.discount!.isNotEmpty &&
                                           productModel.discount!.isNotEmpty &&
-                                          productModel.price !=
-                                              productModel.salePrice)
+                                          productModel.price != productModel.salePrice)
                                         Stack(
                                           alignment: Alignment.center,
                                           children: [
                                             Image.asset(
                                               AppDecoration.discount,
-                                              width:
-                                                  AppDecoration().screenWidth *
-                                                      0.14,
+                                              width: AppDecoration().screenWidth * 0.14,
                                             ),
                                             Text(
                                               '${productModel.discount}%\noff',
                                               style: TextStyle(
-                                                fontSize: AppDecoration()
-                                                        .screenWidth *
-                                                    0.035,
+                                                fontSize: AppDecoration().screenWidth * 0.035,
                                                 color: AppColors.secondaryColor,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -116,22 +101,17 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                        width:
-                                            AppDecoration().screenWidth * 0.5,
+                                        width: AppDecoration().screenWidth * 0.5,
                                         child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8, 15, 8, 0),
+                                          padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
                                           child: Text(
                                             productModel.name!,
                                             style: TextStyle(
                                               color: AppColors.black,
-                                              fontSize:
-                                                  AppDecoration().screenWidth *
-                                                      0.05,
+                                              fontSize: AppDecoration().screenWidth * 0.05,
                                               fontFamily: AppDecoration.cairo,
                                               fontWeight: FontWeight.bold,
                                               height: 1.2,
@@ -140,20 +120,14 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width:
-                                            AppDecoration().screenWidth * 0.5,
+                                        width: AppDecoration().screenWidth * 0.5,
                                         child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8, 15, 8, 0),
+                                          padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
                                           child: Text(
-                                            productModel.medicineType == '1'
-                                                ? "Prescription Requried"
-                                                : "Prescription Not Requried",
+                                            productModel.medicineType == '1' ? "Prescription Requried" : "Prescription Not Requried",
                                             style: TextStyle(
                                               color: AppColors.red,
-                                              fontSize:
-                                                  AppDecoration().screenWidth *
-                                                      0.035,
+                                              fontSize: AppDecoration().screenWidth * 0.035,
                                               fontFamily: AppDecoration.cairo,
                                               fontWeight: FontWeight.bold,
                                               height: 1,
@@ -162,22 +136,14 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width:
-                                            AppDecoration().screenWidth * 0.5,
+                                        width: AppDecoration().screenWidth * 0.5,
                                         child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8, 2, 8, 0),
+                                          padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
                                           child: Text(
-                                            productModel.manufacturedBy!
-                                                        .length >=
-                                                    10
-                                                ? '${productModel.manufacturedBy!.substring(0, 10)}..'
-                                                : productModel.manufacturedBy!,
+                                            productModel.manufacturedBy!.length >= 10 ? '${productModel.manufacturedBy!.substring(0, 10)}..' : productModel.manufacturedBy!,
                                             style: TextStyle(
                                               color: AppColors.blue,
-                                              fontSize:
-                                                  AppDecoration().screenWidth *
-                                                      0.04,
+                                              fontSize: AppDecoration().screenWidth * 0.04,
                                               fontFamily: AppDecoration.cairo,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -185,24 +151,18 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width:
-                                            AppDecoration().screenWidth * 0.5,
+                                        width: AppDecoration().screenWidth * 0.5,
                                         child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8, 0, 8, 0),
+                                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                           child: Text(
                                             productModel.composition != null
-                                                ? productModel.composition!
-                                                            .length >=
-                                                        35
+                                                ? productModel.composition!.length >= 35
                                                     ? '${productModel.composition!.substring(0, 35)}..'
                                                     : productModel.composition!
                                                 : '',
                                             style: TextStyle(
                                               color: AppColors.black,
-                                              fontSize:
-                                                  AppDecoration().screenWidth *
-                                                      0.03,
+                                              fontSize: AppDecoration().screenWidth * 0.03,
                                               fontFamily: AppDecoration.cairo,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -213,81 +173,51 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                           children: [
-                                            if (productModel.discount == '0' ||
-                                                productModel.discount == null ||
-                                                productModel
-                                                    .discount!.isEmpty ||
-                                                productModel.price ==
-                                                    productModel.salePrice)
+                                            if (productModel.discount == '0' || productModel.discount == null || productModel.discount!.isEmpty || productModel.price == productModel.salePrice)
                                               SizedBox(
-                                                width: AppDecoration()
-                                                        .screenWidth *
-                                                    0.4,
+                                                width: AppDecoration().screenWidth * 0.4,
                                                 child: Text(
                                                   'Price : ${AppTexts.indianRupee} ${productModel.price}',
                                                   style: TextStyle(
-                                                    fontSize: AppDecoration()
-                                                            .screenWidth *
-                                                        0.045,
+                                                    fontSize: AppDecoration().screenWidth * 0.045,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
-                                            if (productModel.discount != '0' &&
-                                                productModel.discount != null &&
-                                                productModel
-                                                    .discount!.isNotEmpty &&
-                                                productModel.price !=
-                                                    productModel.salePrice)
+                                            if (productModel.discount != '0' && productModel.discount != null && productModel.discount!.isNotEmpty && productModel.price != productModel.salePrice)
                                               Row(
                                                 children: [
                                                   Text(
                                                     'Price : ${AppTexts.indianRupee} ',
                                                     style: TextStyle(
-                                                      fontSize: AppDecoration()
-                                                              .screenWidth *
-                                                          0.045,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      fontSize: AppDecoration().screenWidth * 0.045,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                   Container(
                                                     constraints: BoxConstraints(
-                                                      maxWidth: AppDecoration()
-                                                              .screenWidth *
-                                                          0.2,
+                                                      maxWidth: AppDecoration().screenWidth * 0.2,
                                                     ),
                                                     child: Text(
                                                       productModel.price!,
                                                       style: TextStyle(
-                                                        fontSize: AppDecoration()
-                                                                .screenWidth *
-                                                            0.03,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .lineThrough,
-                                                        decorationThickness:
-                                                            2.5,
+                                                        fontSize: AppDecoration().screenWidth * 0.03,
+                                                        fontWeight: FontWeight.w500,
+                                                        decoration: TextDecoration.lineThrough,
+                                                        decorationThickness: 2.5,
                                                         height: 0.5,
                                                       ),
                                                     ),
                                                   ),
                                                   Container(
                                                     constraints: BoxConstraints(
-                                                      maxWidth: AppDecoration()
-                                                              .screenWidth *
-                                                          0.25,
+                                                      maxWidth: AppDecoration().screenWidth * 0.25,
                                                     ),
                                                     child: Text(
                                                       productModel.salePrice!,
                                                       style: TextStyle(
-                                                        fontSize: AppDecoration()
-                                                                .screenWidth *
-                                                            0.055,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                        fontSize: AppDecoration().screenWidth * 0.055,
+                                                        fontWeight: FontWeight.bold,
                                                       ),
                                                     ),
                                                   ),
@@ -307,9 +237,7 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                     Expanded(
                                       child: CustomButton(
                                         function: () {
-                                          controller.buyNow(
-                                            productModel: productModel,
-                                          );
+                                          controller.buyNow(productModel: productModel);
                                         },
                                         buttonColor: AppColors.primaryColor,
                                         margin: const EdgeInsets.fromLTRB(
@@ -324,20 +252,14 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         text: 'Buy Now',
                                       ),
                                     ),
-                                    SizedBox(
-                                        width:
-                                            AppDecoration().screenWidth * 0.01),
+                                    SizedBox(width: AppDecoration().screenWidth * 0.01),
                                     Expanded(
                                       child: CustomButton(
                                         function: () {
                                           if (inCart) {
-                                            controller.removeFromCart(
-                                              productModel: productModel,
-                                            );
+                                            controller.removeFromCart(productModel: productModel);
                                           } else {
-                                            controller.addToCart(
-                                              productModel: productModel,
-                                            );
+                                            controller.addToCart(productModel: productModel);
                                           }
                                         },
                                         buttonColor: AppColors.primaryColor,
@@ -350,9 +272,7 @@ class PharmacyProductsList extends GetView<PharmaciesController> {
                                         circularRadius: 10,
                                         cairoFont: false,
                                         fontWeight: FontWeight.w400,
-                                        text: inCart
-                                            ? 'Remove From Cart'
-                                            : 'Add To Cart',
+                                        text: inCart ? 'Remove From Cart' : 'Add To Cart',
                                       ),
                                     ),
                                   ],

@@ -58,7 +58,7 @@ class DoctorAccountsScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                   style: ButtonStyle(
-                                    overlayColor: MaterialStatePropertyAll(
+                                    overlayColor: WidgetStatePropertyAll(
                                       AppColors.primaryColor.withOpacity(0.1),
                                     ),
                                   ),
@@ -286,7 +286,7 @@ class DoctorAccountsScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                   style: ButtonStyle(
-                                    overlayColor: MaterialStatePropertyAll(
+                                    overlayColor: WidgetStatePropertyAll(
                                       AppColors.primaryColor.withOpacity(0.1),
                                     ),
                                   ),

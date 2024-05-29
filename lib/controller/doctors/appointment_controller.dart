@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:teleprac/core/class/crud.dart';
 import 'package:teleprac/core/class/request_status.dart';
 import 'package:teleprac/core/const/colors.dart';
@@ -8,9 +9,8 @@ import 'package:teleprac/core/const/decoration.dart';
 import 'package:teleprac/core/const/links.dart';
 import 'package:teleprac/core/functions/loading_dialog.dart';
 import 'package:teleprac/core/services/my_services.dart';
-import 'package:teleprac/model/global/response_model.dart';
 import 'package:teleprac/model/doctors/session_model.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:teleprac/model/global/response_model.dart';
 import 'package:teleprac/model/home/dashboard/family_member_model.dart';
 import 'package:teleprac/routes.dart';
 import 'package:teleprac/view/widgets/home/account_settings/screens/profile_settings/drop_down.dart';
@@ -62,16 +62,15 @@ class AppointmentController extends GetxController {
     myMobileno = myServices.sharedPreferences.getString('mobileNumber')!;
     initializeTimeZones();
     indianTimeZone = getLocation('Asia/Kolkata');
-    appointmentDate =
-        TZDateTime.now(indianTimeZone).toString().substring(0, 10);
+    appointmentDate = TZDateTime.now(indianTimeZone).toString().substring(0, 10);
   }
 
+  //Modify this date
   selectDate({required BuildContext context}) async {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.parse(appointmentDate),
-      firstDate: DateTime.parse(
-          TZDateTime.now(indianTimeZone).toString().substring(0, 10)),
+      firstDate: DateTime.parse(TZDateTime.now(indianTimeZone).toString().substring(0, 10)),
       lastDate: DateTime.parse(appointmentDate).add(const Duration(days: 365)),
     );
 
@@ -92,12 +91,21 @@ class AppointmentController extends GetxController {
       if (responseModel.responseCode == '201') {
         sessions = [];
         await nextAvailableAppointment();
+        if (sessions.isNotEmpty) {
+          selectedSessionIndex = 0;
+          selectedTokenIndex = null;
+        }
         update();
       } else if (responseModel.responseCode == '200') {
         if (responseModel.data is List) {
           sessions = [];
           for (var element in responseModel.data) {
             sessions.add(SessionModel.fromJson(element));
+          }
+
+          if (sessions.isNotEmpty) {
+            selectedSessionIndex = 0;
+            selectedTokenIndex = null;
           }
           update();
         }
@@ -140,12 +148,10 @@ class AppointmentController extends GetxController {
     if (res is RequsetStatus == false) {
       ResponseModel responseModel = ResponseModel.fromJson(res);
 
-      if (responseModel.responseCode == '200' ||
-          responseModel.responseCode == '201') {
+      if (responseModel.responseCode == '200' || responseModel.responseCode == '201') {
         familyMembers = [];
         for (var element in responseModel.doctorsList!) {
-          FamilyMemberModel familyMemberModel =
-              FamilyMemberModel.fromJson(element);
+          FamilyMemberModel familyMemberModel = FamilyMemberModel.fromJson(element);
           familyMembers.add(
             {
               'label': familyMemberModel.name,
@@ -185,8 +191,7 @@ class AppointmentController extends GetxController {
                     }
                   }
                 } else {
-                  razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
-                      (PaymentSuccessResponse response) async {
+                  razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, (PaymentSuccessResponse response) async {
                     loading();
                     var res = await bookAppointmentRequset();
                     if (res is RequsetStatus == false) {
@@ -238,9 +243,7 @@ class AppointmentController extends GetxController {
 
   bookAppointment() async {
     if (previousRoute != AppRoutes.patientProfileScreen) {
-      if (sessions.isNotEmpty &&
-          selectedSessionIndex != null &&
-          selectedTokenIndex != null) {
+      if (sessions.isNotEmpty && selectedSessionIndex != null && selectedTokenIndex != null) {
         Get.defaultDialog(
           middleText: 'Are You Booking for Your Self Or Family Member? ',
           actions: [
@@ -261,8 +264,7 @@ class AppointmentController extends GetxController {
                     }
                   }
                 } else {
-                  razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
-                      (PaymentSuccessResponse response) async {
+                  razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, (PaymentSuccessResponse response) async {
                     loading();
                     var res = await bookAppointmentRequset();
                     if (res is RequsetStatus == false) {
@@ -318,9 +320,7 @@ class AppointmentController extends GetxController {
         Get.defaultDialog(middleText: 'No Appointment Selected');
       }
     } else {
-      if (sessions.isNotEmpty &&
-          selectedSessionIndex != null &&
-          selectedTokenIndex != null) {
+      if (sessions.isNotEmpty && selectedSessionIndex != null && selectedTokenIndex != null) {
         loading();
         await bookFollowUpAppointmentRequset();
         selectedSessionIndex = null;
@@ -334,14 +334,11 @@ class AppointmentController extends GetxController {
   }
 
   bookAppointmentRequset() async {
-    TokenDetailsModel tokenDetailsModel =
-        sessions[selectedSessionIndex!].tokenDetails![selectedTokenIndex!];
+    TokenDetailsModel tokenDetailsModel = sessions[selectedSessionIndex!].tokenDetails![selectedTokenIndex!];
     var res = await crud.connect(
       link: AppLinks.checkout,
       data: {
-        'payment_type': amount.removeAllWhitespace == '0' || amount.isEmpty
-            ? 'Free'
-            : 'Paid',
+        'payment_type': amount.removeAllWhitespace == '0' || amount.isEmpty ? 'Free' : 'Paid',
         'payment_method': '1',
         'family_id': familyMemberId,
         'myself': familyMemberId.isEmpty ? '1' : '0',
@@ -365,8 +362,7 @@ class AppointmentController extends GetxController {
   }
 
   bookFollowUpAppointmentRequset() async {
-    TokenDetailsModel tokenDetailsModel =
-        sessions[selectedSessionIndex!].tokenDetails![selectedTokenIndex!];
+    TokenDetailsModel tokenDetailsModel = sessions[selectedSessionIndex!].tokenDetails![selectedTokenIndex!];
     var res = await crud.connect(
       link: AppLinks.bookFollowUp,
       data: {
@@ -390,10 +386,7 @@ class AppointmentController extends GetxController {
     var res = await nextAvailableAppointmentRequest();
     ResponseModel responseModel = ResponseModel.fromJson(res);
     if (responseModel.responseCode == '200') {
-      nextAvailable =
-          responseModel.data['next_availability'].toString() == 'null'
-              ? null
-              : responseModel.data['next_availability'].toString();
+      nextAvailable = responseModel.data['next_availability'].toString() == 'null' ? null : responseModel.data['next_availability'].toString();
       update();
     }
   }

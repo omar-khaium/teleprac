@@ -33,7 +33,7 @@ class NotifyMeScreen extends StatelessWidget {
               function: () {
                 controller.notifyNext();
               },
-              text: 'Confirm',
+              text: 'Confirm & Submit',
               textColor: AppColors.secondaryColor,
               buttonColor: AppColors.primaryColor,
               circularRadius: 10,

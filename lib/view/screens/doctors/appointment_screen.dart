@@ -16,6 +16,12 @@ class AppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppointmentController controller = Get.put(AppointmentController());
+
+    if (controller.sessions.isNotEmpty) {
+      controller.selectedSessionIndex = 0;
+      controller.selectedTokenIndex = null;
+    }
+
     return Scaffold(
       backgroundColor: AppColors.greyDesign,
       body: WillPopScope(
@@ -44,22 +50,25 @@ class AppointmentScreen extends StatelessWidget {
               ),
               const AppointmentsList(),
               SizedBox(height: AppDecoration().screenHeight * 0.02),
-                
-                BookButton2(
-                 onPressed: () {
-                  Get.toNamed(AppRoutes.invoiceScreen, arguments: controller);
 
-                  // Get.toNamed(AppRoutes.invoiceScreen, arguments: {
-                  //   'amount': controller.amount,
-                  //   'doctorName': controller.doctorName,
-                  //   'appointmentDate': controller.appointmentDate,
-                  //   'appointmentType': controller.appointmentType,
-                  //   'time':controller.indianTimeZone,
-                    
-                  //   // Pass other necessary details
-                  // });
-                  }
-              ),
+              GetBuilder<AppointmentController>(builder: (controller) {
+                return controller.sessions.length != 0
+                    ? BookButton2(onPressed: () {
+                        Get.toNamed(AppRoutes.invoiceScreen, arguments: controller);
+
+                        // Get.toNamed(AppRoutes.invoiceScreen, arguments: {
+                        //   'amount': controller.amount,
+                        //   'doctorName': controller.doctorName,
+                        //   'appointmentDate': controller.appointmentDate,
+                        //   'appointmentType': controller.appointmentType,
+                        //   'time':controller.indianTimeZone,
+
+                        //   // Pass other necessary details
+                        // });
+                      })
+                    : Container();
+              }),
+
               SizedBox(height: AppDecoration().screenHeight * 0.02),
               // const LowerPart(),
               SizedBox(height: AppDecoration().screenHeight * 0.02),
